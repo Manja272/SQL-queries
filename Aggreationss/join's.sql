@@ -64,3 +64,74 @@
 --         on e.EMPLOYEE_ID = p.id;
 -- //Display the inner join assigned to be employee and project
 
+-- 11. Retrieve employees who have not been assigned to any project using LEFT JOIN
+-- select e.employee_id, e.first_name
+-- from hr.EMPLOYEES e
+-- LEFT JOIN  projects.projects p 
+--         on e.employee_id = p.id;
+-- //Display the employee name and id in each project using left join
+
+-- 12. Retrieve project names along with the department handling them using INNER JOIN
+-- SELECT p.name, d.department_name
+-- from PROJECTS.projects p
+-- INNER join hr.DEPARTMENTS d
+--         ON  d.DEPARTMENT_ID = p.ID;
+--   //Display the project name and department name using inner join
+
+-- 17. Retrieve employees, their department names, and their assigned project names using multiple INNER JOINs
+-- select  e.first_name, d.department_name, p.name
+-- from hr.EMPLOYEES e
+-- INNER JOIN hr.DEPARTMENTS d
+--         ON e.department_id = d.DEPARTMENT_ID
+-- inner JOIN PROJECTS.PROJECTS p
+--         on p.id = e.employee_id;
+-- //Display the multiple inner joins in all the employee id(like project, employee, department)
+
+-- 18. Retrieve employees who have worked on more than one project using INNER JOIN and GROUP BY
+-- SELECT e.employee_id, e.first_name, COUNT(p.id) as project_count
+-- from hr.EMPLOYEES e
+-- INNER JOIN PROJECTS.projects p
+--         on p.id = e.EMPLOYEE_ID
+-- GROUP by e.EMPLOYEE_ID ,  e.first_name
+-- having COUNT(p.id) > 1;
+-- //Display the inner joins who are all having done by more than one project
+
+-- 20. Retrieve employees who earn more than their department’s average salary using INNER JOIN and a subquery
+-- SELECT e.first_name, e.salary, e.employee_id
+-- from hr.EMPLOYEES e
+-- INNER JOIN hr.DEPARTMENTS d
+--         on e.department_id = d.DEPARTMENT_ID;
+-- where e.salary > (select avg(salary) from hr.EMPLOYEES where department_id = e.department_id);
+-- //Display the average salary of each employee of  department using inner join
+
+-- 21. Retrieve employees who have the same job role as another employee using SELF JOIN
+-- SELECT e1.EMPLOYEE_ID, e1.first_name, e2.first_name as coworker, e1.JOB_ID
+-- from HR.employees e1
+-- INNER JOIN hr.EMPLOYEES e2
+--        on  e1.JOB_ID = e2.JOB_ID  and e1.employee_id <> e2.employee_id;
+-- // Display the self join in same employees in another job role
+
+-- 22. Retrieve employees and their department names, but show "Not Assigned" if an employee has no department using LEFT JOIN and COALESCE
+-- select e.employee_id, e.first_name, coalesce(d.department_name, 'not Assigned') as deaprtment_name
+-- from hr.EMPLOYEES e
+-- LEFT join hr.DEPARTMENTS d
+--         on e.DEPARTMENT_ID = d.DEPARTMENT_ID;
+-- //Display the employees of each department  using left outer join
+
+-- 23. Retrieve employees and their assigned projects, including employees who are not assigned to any project using FULL OUTER JOIN
+-- select e.employee_id, e.first_name, p.name
+-- from hr.EMPLOYEES e
+-- FULL join PROJECTS.PROJECTS p
+--         on e.EMPLOYEE_ID = p.id;
+-- //Display the emeployee in eaach project using full outer join
+
+-- 24. Retrieve employees who work in a city where their department is located using INNER JOIN
+-- SELECT e.employee_id, e.first_name, l.city
+-- from hr.EMPLOYEES e
+-- INNER join hr.LOCATIONS l
+--         on e.EMPLOYEE_ID = l.LOCATION_ID
+-- inner join hr.departments d 
+--         ON d.department_id = e.employee_id
+--  //Display all the department of employees worked in other locations
+
+
